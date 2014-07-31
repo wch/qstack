@@ -26,13 +26,10 @@ Queue <- function() {
     dots <- pairlist(...)
 
     if (is.null(q)) {
-      # For the first item, make a pairlist with the item
       q <<- dots
-      last <<- q
+      last <<- last_(q)
     } else {
-      # This modifies `last` in place, adding another item to the pairlist.
-      # Because `last` points to the last element in q, this also indirectly
-      # modifies `q`, in violation of the usual R copy-on-write behavior.
+      # This modifies `last` in place, adding the `dots` pairlist.
       last <<- append_pl_(last, dots)
     }
     invisible(self)
