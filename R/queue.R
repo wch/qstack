@@ -52,9 +52,7 @@ Queue <- function() {
 
   size <- function() length(q)
 
-  # This forces a copy of q, so that the outside world doesn't get exposed
-  # to our in-place modification of q.
-  show <- function() duplicate_(q)
+  show <- function() as.list(q)
 
   self
 }

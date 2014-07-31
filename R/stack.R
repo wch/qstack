@@ -30,7 +30,7 @@ Stack <- function() {
 
   size <- function() length(s)
 
-  show <- function() duplicate_(s)
+  show <- function() as.list(s)
 
   self
 }
