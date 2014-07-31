@@ -22,15 +22,15 @@ Queue <- function() {
     invisible(self)
   }
 
-  add_many <- function(...) {
-    dots <- pairlist(...)
+  add_many <- function(..., .list = NULL) {
+    args <- concat_(pairlist(...), as.pairlist(.list))
 
     if (is.null(q)) {
-      q <<- dots
+      q <<- args
       last <<- last_(q)
     } else {
-      # This modifies `last` in place, adding the `dots` pairlist.
-      last <<- append_pl_(last, dots)
+      # This modifies `last` in place, adding the `args` pairlist.
+      last <<- append_pl_(last, args)
     }
     invisible(self)
   }
