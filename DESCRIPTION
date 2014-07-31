@@ -2,7 +2,7 @@ Package: qstack
 Title: Fast queue and stack
 Version: 0.0.1
 Authors@R: "Winston Chang <winston@stdout.org> [aut, cre]"
-Description:
+Description: 
 Depends:
     R (>= 3.0)
 Suggests:
