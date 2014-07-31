@@ -1,0 +1,17 @@
+Package: qstack
+Title: Fast queue and stack
+Version: 0.0.1
+Authors@R: "Winston Chang <winston@stdout.org> [aut, cre]"
+Description:
+Depends:
+    R (>= 3.0)
+Suggests:
+    knitr,
+    microbenchmark,
+    pryr,
+    testthat
+License: MIT + file LICENSE
+URL: https://github.com/wch/qstack/
+Roxygen: list(wrap = FALSE)
+LazyData: true
+VignetteBuilder: knitr
