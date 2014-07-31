@@ -109,11 +109,7 @@ SEXP append(SEXP x, SEXP value) {
     error("x must be a pairlist of length 1.");
 
   // Traverse to end
-  SEXP next = CDR(x);
-  while (next != R_NilValue) {
-    x = next;
-    next = CDR(next);
-  }
+  x = last(x);
 
   // Make a pairlist containing the value and add it to the end
   SETCDR(x, CONS(value, R_NilValue));
@@ -130,24 +126,14 @@ SEXP append_pl(SEXP x, SEXP y) {
     error("y must be a pairlist.");
 
   // Traverse to end
-  SEXP next = CDR(x);
-  while (next != R_NilValue) {
-    x = next;
-    next = CDR(next);
-  }
+  x = last(x);
 
   // Copy y so that we dont make the original y part of x
   SEXP new_y = PROTECT(duplicate(y));
   SETCDR(x, new_y);
-
-  // Go to the end and return last element
-  next = CDR(x);
-  while (next != R_NilValue) {
-    x = next;
-    next = CDR(next);
-  }
   UNPROTECT(1);
-  return x;
+  // Go to the end and return last element
+  return last(x);
 }
 
 // Force the creation of a duplicate of an object
