@@ -11,7 +11,7 @@ Stack <- function() {
   }
 
   push_many <- function(..., .list = NULL) {
-    args <- rev_pairlist_(concat_(pairlist(...), .list))
+    args <- rev_pairlist_(concat_(pairlist(...), as.pairlist(.list)))
     s <<- concat_(args, s)
     invisible(self)
   }
