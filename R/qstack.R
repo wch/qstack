@@ -7,6 +7,9 @@ car_ <- function(x) .Call(car, x)
 #' @useDynLib qstack cdr
 cdr_ <- function(x) .Call(cdr, x)
 
+#' @useDynLib qstack last
+last_ <- function(x) .Call(last, x)
+
 #' @useDynLib qstack push
 push_ <- function(x, value) .Call(push, x, value)
 

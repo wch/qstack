@@ -22,6 +22,22 @@ SEXP cdr(SEXP x) {
 }
 
 
+// Given a pairlist, traverse to the end and return a pairlist pointing to
+// the last element. Note that this doesn't make a copy of x.
+SEXP last(SEXP x) {
+  if (x == R_NilValue)
+    return R_NilValue;
+  if (TYPEOF(x) != LISTSXP)
+    error("x must be a pairlist");
+
+  SEXP next = x;
+  while (next != R_NilValue) {
+    x = next;
+    next = CDR(next);
+  }
+  return x;
+}
+
 // Add an item to the head of a pairlist (position 1).
 // Note that this does not duplicate the entire pairlist and so is potentially
 // unsafe to use with functions that modify pairlists in place.
