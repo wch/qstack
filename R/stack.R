@@ -24,6 +24,8 @@ Stack <- function() {
 
   peek <- function() car_(s)
 
+  empty <- function() is.null(s)
+
   reset <- function() s <<- NULL
 
   size <- function() length(s)

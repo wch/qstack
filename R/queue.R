@@ -46,6 +46,8 @@ Queue <- function() {
 
   peek <- function() car_(q)
 
+  empty <- function() is.null(q)
+
   reset <- function() {
     q <<- NULL
     last <<- NULL
