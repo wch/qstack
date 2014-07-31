@@ -1,5 +1,5 @@
 context("C code")
-
+library(pryr)
 
 test_that("rev_pairlist", {
   expect_identical(rev_pairlist_(pairlist()), NULL)
@@ -15,6 +15,16 @@ test_that("cdr_", {
   expect_error(cdr_(1))
   expect_error(cdr_(list()))
   expect_identical(cdr_(pairlist()), NULL)
-  expect_identical(cdr_(pairlist(1)), pairlist())
+  expect_identical(cdr_(pairlist(1)), NULL)
   expect_identical(cdr_(pairlist(1,2,b=3)), pairlist(2,b=3))
+})
+
+
+test_that("last_", {
+  p <- pairlist()
+  expect_identical(last_(p), NULL)
+  p <- pairlist(1)
+  expect_identical(address(last_(p)), address(p))
+  p <- pairlist(1,2,3)
+  expect_identical(address(cdr_(cdr_(p))), address(last_(p)))
 })
