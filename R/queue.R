@@ -10,13 +10,12 @@ Queue <- function() {
 
   add <- function(x) {
     if (is.null(q)) {
-      # For the first item, make a pairlist with the item
       q <<- pairlist(x)
       last <<- q
     } else {
-      # This modifies `last` in place, adding another item to the pairlist.
+      # This modifies the `last` pairlist in place, adding another item.
       # Because `last` points to the last element in q, this also indirectly
-      # modifies `q`, in violation of the usual R copy-on-write behavior.
+      # modifies q, in violation of the usual R copy-on-write behavior.
       last <<- append_(last, x)
     }
     invisible(self)
