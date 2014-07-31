@@ -17,6 +17,10 @@ test_that("cdr_", {
   expect_identical(cdr_(pairlist()), NULL)
   expect_identical(cdr_(pairlist(1)), NULL)
   expect_identical(cdr_(pairlist(1,2,b=3)), pairlist(2,b=3))
+
+  # Make sure we're not making copies
+  p <- pairlist(1,2,3)
+  expect_identical(address(cdr_(p)), address(cdr_(p)))
 })
 
 
