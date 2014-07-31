@@ -104,7 +104,7 @@ SEXP concat(SEXP x, SEXP y) {
 // in-place, and the returned pairlist is actually part of the modified x
 // pairlist. If you repeatedly run x <- cdr(x), you'll eventually get a
 // pairlist that has the same memory address as the returned pairlist.
-SEXP append(SEXP x, SEXP value) {
+SEXP append2(SEXP x, SEXP value) {
   if (TYPEOF(x) != LISTSXP)
     error("x must be a pairlist of length 1.");
 

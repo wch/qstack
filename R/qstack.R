@@ -19,8 +19,8 @@ rev_pairlist_ <- function(x) .Call(rev_pairlist, x)
 #' @useDynLib qstack concat
 concat_ <- function(x, y) .Call(concat, x, y)
 
-#' @useDynLib qstack append
-append_ <- function(x, value) .Call(append, x, value)
+#' @useDynLib qstack append2
+append_ <- function(x, value) .Call(append2, x, value)
 
 #' @useDynLib qstack append_pl
 append_pl_ <- function(x, ...) .Call(append_pl, x, ...)

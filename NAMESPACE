@@ -2,7 +2,7 @@
 
 export(Queue)
 export(Stack)
-useDynLib(qstack,append)
+useDynLib(qstack,append2)
 useDynLib(qstack,append_pl)
 useDynLib(qstack,car)
 useDynLib(qstack,cdr)
