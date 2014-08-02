@@ -49,7 +49,7 @@ SEXP push(SEXP x, SEXP value) {
 
 
 // Given a pairlist, return a pairlist with reversed order.
-SEXP rev_pairlist (SEXP x) {
+SEXP rev_pl(SEXP x) {
   if (x == R_NilValue)
     return R_NilValue;
   if (TYPEOF(x) != LISTSXP)

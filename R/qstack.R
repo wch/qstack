@@ -13,8 +13,8 @@ last_ <- function(x) .Call(last, x)
 #' @useDynLib qstack push
 push_ <- function(x, value) .Call(push, x, value)
 
-#' @useDynLib qstack rev_pairlist
-rev_pairlist_ <- function(x) .Call(rev_pairlist, x)
+#' @useDynLib qstack rev_pl
+rev_pl_ <- function(x) .Call(rev_pl, x)
 
 #' @useDynLib qstack concat
 concat_ <- function(x, y) .Call(concat, x, y)
