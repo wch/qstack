@@ -76,6 +76,8 @@ SEXP rev_pl(SEXP x) {
 // This modifies pairlist x in place. The returned pairlist is part of pairlist
 // x; it is the last node in the linked list.
 SEXP append2(SEXP x, SEXP value) {
+  if (x == R_NilValue)
+    return CONS(value, R_NilValue);
   if (TYPEOF(x) != LISTSXP)
     error("x must be a pairlist of length 1.");
 
@@ -93,6 +95,10 @@ SEXP append2(SEXP x, SEXP value) {
 // This modifies pairlist x in place, and the returned pairlist includes the
 // original x and y.
 SEXP append_pl(SEXP x, SEXP y) {
+  if (x == R_NilValue)
+    return y;
+  if (y == R_NilValue)
+    return x;
   if (TYPEOF(x) != LISTSXP)
     error("x must be a pairlist.");
   if (TYPEOF(y) != LISTSXP)
