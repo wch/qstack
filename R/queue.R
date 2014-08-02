@@ -10,7 +10,7 @@ Queue <- function() {
 
   add <- function(x) {
     if (is.null(q)) {
-      q <<- pairlist(x)
+      q <<- as.pairlist(x)
       last <<- q
     } else {
       # This modifies the `last` pairlist in place, adding another item.
