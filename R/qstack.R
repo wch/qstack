@@ -16,9 +16,6 @@ push_ <- function(x, value) .Call(push, x, value)
 #' @useDynLib qstack rev_pl
 rev_pl_ <- function(x) .Call(rev_pl, x)
 
-#' @useDynLib qstack concat
-concat_ <- function(x, y) .Call(concat, x, y)
-
 #' @useDynLib qstack append2
 append_ <- function(x, value) .Call(append2, x, value)
 

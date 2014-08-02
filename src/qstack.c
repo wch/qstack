@@ -69,36 +69,6 @@ SEXP rev_pl(SEXP x) {
 }
 
 
-// Concatenate two pairlists together. Pairlist x will be duplicated, but
-// pairlist y will be part of pairlist x. This is potentially dangerous if you
-// use functions that aren't copy-on-write.
-SEXP concat(SEXP x, SEXP y) {
-  if (x == R_NilValue)
-    return y;
-  if (y == R_NilValue)
-    return x;
-  if (TYPEOF(x) != LISTSXP)
-    error("x must be a pairlist.");
-  if (TYPEOF(y) != LISTSXP)
-    error("y must be a pairlist.");
-
-  // Copy x so we dont alter it
-  SEXP new_x = PROTECT(duplicate(x));
-  SEXP pl = new_x;
-
-  // Traverse to end of the pairlist
-  SEXP next = CDR(pl);
-  while (next != R_NilValue) {
-    pl = next;
-    next = CDR(next);
-  }
-  SETCDR(pl, y);
-
-  UNPROTECT(1);
-  return new_x;
-}
-
-
 // Tack on an item to the end of a pairlist, and then return a pairlist that
 // points to the last item. This does two unusual things (for R): it modifies x
 // in-place, and the returned pairlist is actually part of the modified x

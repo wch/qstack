@@ -22,7 +22,7 @@ Queue <- function() {
   }
 
   madd <- function(..., .list = NULL) {
-    args <- concat_(pairlist(...), as.pairlist(.list))
+    args <- append_pl_(pairlist(...), as.pairlist(.list))
 
     if (is.null(q)) {
       q <<- args
