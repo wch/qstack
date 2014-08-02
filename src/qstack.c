@@ -13,6 +13,7 @@ SEXP car(SEXP x) {
 
 
 // Given a pairlist, return a pairlist with all except the first item
+// Returned pairlist is NOT a copy; it is part of the original x.
 SEXP cdr(SEXP x) {
   if (x == R_NilValue)
     return R_NilValue;
@@ -23,7 +24,8 @@ SEXP cdr(SEXP x) {
 
 
 // Given a pairlist, traverse to the end and return a pairlist pointing to
-// the last element. Note that this doesn't make a copy of x.
+// the last element.
+// Returned pairlist is NOT a copy; it is part of the original x.
 SEXP last(SEXP x) {
   if (x == R_NilValue)
     return R_NilValue;
@@ -39,8 +41,7 @@ SEXP last(SEXP x) {
 }
 
 // Add an item to the head of a pairlist (position 1).
-// Note that this does not duplicate the entire pairlist and so is potentially
-// unsafe to use with functions that modify pairlists in place.
+// Returned pairlist is NOT a copy; it includes the original x.
 SEXP push(SEXP x, SEXP value) {
   if (x != R_NilValue && TYPEOF(x) != LISTSXP)
     error("x must be a pairlist");
@@ -49,6 +50,7 @@ SEXP push(SEXP x, SEXP value) {
 
 
 // Given a pairlist, return a pairlist with reversed order.
+// Returned pairlist is a copy.
 SEXP rev_pl(SEXP x) {
   if (x == R_NilValue)
     return R_NilValue;
@@ -70,10 +72,9 @@ SEXP rev_pl(SEXP x) {
 
 
 // Tack on an item to the end of a pairlist, and then return a pairlist that
-// points to the last item. This does two unusual things (for R): it modifies x
-// in-place, and the returned pairlist is actually part of the modified x
-// pairlist. If you repeatedly run x <- cdr(x), you'll eventually get a
-// pairlist that has the same memory address as the returned pairlist.
+// points to the last item.
+// This modifies pairlist x in place. The returned pairlist is part of pairlist
+// x; it is the last node in the linked list.
 SEXP append2(SEXP x, SEXP value) {
   if (TYPEOF(x) != LISTSXP)
     error("x must be a pairlist of length 1.");
@@ -89,6 +90,8 @@ SEXP append2(SEXP x, SEXP value) {
 
 // Similar to append, except this takes two pairlists, x and y, and appends y to
 // the end of x.
+// This modifies pairlist x in place, and the returned pairlist includes the
+// original x and y.
 SEXP append_pl(SEXP x, SEXP y) {
   if (TYPEOF(x) != LISTSXP)
     error("x must be a pairlist.");
