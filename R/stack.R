@@ -10,7 +10,7 @@ Stack <- function() {
     invisible(self)
   }
 
-  push_many <- function(..., .list = NULL) {
+  mpush <- function(..., .list = NULL) {
     args <- rev_pl_(append_pl_(pairlist(...), as.pairlist(.list)))
     s <<- append_pl_(args, s)
     invisible(self)

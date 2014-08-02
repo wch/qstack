@@ -21,7 +21,7 @@ Queue <- function() {
     invisible(self)
   }
 
-  add_many <- function(..., .list = NULL) {
+  madd <- function(..., .list = NULL) {
     args <- concat_(pairlist(...), as.pairlist(.list))
 
     if (is.null(q)) {
