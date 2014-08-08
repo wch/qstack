@@ -26,10 +26,15 @@ Stack <- function() {
 
   empty <- function() is.null(s)
 
-  reset <- function() s <<- NULL
+  reset <- function() {
+    s <<- NULL
+    invisible(self)
+  }
 
   size <- function() length(s)
 
+  # Return the entire stack as a list, where the first item is the most
+  # recently added.
   show <- function() as.list(s)
 
   self
