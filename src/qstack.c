@@ -26,7 +26,7 @@ SEXP cdr(SEXP x) {
 // Given a pairlist, traverse to the end and return a pairlist pointing to
 // the last element.
 // Returned pairlist is NOT a copy; it is part of the original x.
-SEXP last(SEXP x) {
+SEXP last2(SEXP x) {
   if (x == R_NilValue)
     return R_NilValue;
   if (TYPEOF(x) != LISTSXP)
@@ -78,7 +78,7 @@ SEXP append2(SEXP x, SEXP value) {
     error("x must be a pairlist of length 1.");
 
   // Traverse to end
-  x = last(x);
+  x = last2(x);
 
   // Make a pairlist containing the value and add it to the end
   SETCDR(x, CONS(value, R_NilValue));
@@ -101,11 +101,11 @@ SEXP append_pl(SEXP x, SEXP y) {
     error("y must be a pairlist.");
 
   // Traverse to end
-  x = last(x);
+  x = last2(x);
 
   SETCDR(x, y);
   // Go to the end and return last element
-  return last(x);
+  return last2(x);
 }
 
 // Force the creation of a duplicate of an object

@@ -26,7 +26,7 @@ Queue <- function() {
 
     if (is.null(q)) {
       q <<- args
-      last <<- .Call(last, q)
+      last <<- .Call(last2, q)
     } else {
       # This modifies `last` in place, adding the `args` pairlist.
       last <<- .Call(append_pl, last, args)
