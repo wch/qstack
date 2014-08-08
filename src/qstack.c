@@ -57,16 +57,12 @@ SEXP rev_pl(SEXP x) {
   if (TYPEOF(x) != LISTSXP)
     error("x must be a pairlist.");
 
-  // How can we keep the PROTECT out of the loop and move the rest of the
-  // code into the loop?
-  SEXP new_x = PROTECT(CONS(CAR(x), R_NilValue));
-  x = CDR(x);
+  SEXP new_x = R_NilValue;
 
   while (x != R_NilValue) {
     new_x = CONS(CAR(x), new_x);
     x = CDR(x);
   }
-  UNPROTECT(1);
   return new_x;
 }
 
