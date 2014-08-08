@@ -103,10 +103,7 @@ SEXP append_pl(SEXP x, SEXP y) {
   // Traverse to end
   x = last(x);
 
-  // Copy y so that we dont make the original y part of x
-  SEXP new_y = PROTECT(duplicate(y));
-  SETCDR(x, new_y);
-  UNPROTECT(1);
+  SETCDR(x, y);
   // Go to the end and return last element
   return last(x);
 }
