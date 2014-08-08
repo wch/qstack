@@ -19,6 +19,16 @@ test_that("Basic operations", {
   expect_identical(q$size(), 0L)
 })
 
+
+test_that("madd", {
+  q <- Queue()
+  q$madd(1,2,3,4,5,6)
+  expect_identical(q$show(), list(1,2,3,4,5,6))
+  expect_identical(q$remove(), 1)
+  expect_identical(q$remove(), 2)
+})
+
+
 test_that("Removing from empty queue", {
   q <- Queue()
   expect_null(q$remove())

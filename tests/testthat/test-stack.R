@@ -19,6 +19,16 @@ test_that("Basic operations", {
   expect_identical(s$size(), 0L)
 })
 
+
+test_that("mpush", {
+  s <- Stack()
+  s$mpush(1,2,3,4,5,6)
+  expect_identical(s$show(), list(6,5,4,3,2,1))
+  expect_identical(s$pop(), 6)
+  expect_identical(s$pop(), 5)
+})
+
+
 test_that("Popping from empty stack", {
   s <- Stack()
   expect_null(s$pop())
