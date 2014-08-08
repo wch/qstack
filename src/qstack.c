@@ -42,7 +42,7 @@ SEXP last(SEXP x) {
 
 // Add an item to the head of a pairlist (position 1).
 // Returned pairlist is NOT a copy; it includes the original x.
-SEXP push(SEXP x, SEXP value) {
+SEXP push2(SEXP x, SEXP value) {
   if (x != R_NilValue && TYPEOF(x) != LISTSXP)
     error("x must be a pairlist");
   return CONS(value, x);

@@ -16,31 +16,31 @@ Queue <- function() {
       # This modifies the `last` pairlist in place, adding another item.
       # Because `last` points to the last element in q, this also indirectly
       # modifies q, in violation of the usual R copy-on-write behavior.
-      last <<- append_(last, x)
+      last <<- .Call(append2, last, x)
     }
     invisible(self)
   }
 
   madd <- function(..., .list = NULL) {
-    args <- append_pl_(pairlist(...), as.pairlist(.list))
+    args <- .Call(append_pl, pairlist(...), as.pairlist(.list))
 
     if (is.null(q)) {
       q <<- args
-      last <<- last_(q)
+      last <<- .Call(last, q)
     } else {
       # This modifies `last` in place, adding the `args` pairlist.
-      last <<- append_pl_(last, args)
+      last <<- .Call(append_pl, last, args)
     }
     invisible(self)
   }
 
   remove <- function() {
-    val <- car_(q)
-    q <<- cdr_(q)
+    val <- .Call(car, q)
+    q <<- .Call(cdr, q)
     val
   }
 
-  peek <- function() car_(q)
+  peek <- function() .Call(car, q)
 
   empty <- function() is.null(q)
 

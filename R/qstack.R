@@ -10,8 +10,8 @@ cdr_ <- function(x) .Call(cdr, x)
 #' @useDynLib qstack last
 last_ <- function(x) .Call(last, x)
 
-#' @useDynLib qstack push
-push_ <- function(x, value) .Call(push, x, value)
+#' @useDynLib qstack push2
+push_ <- function(x, value) .Call(push2, x, value)
 
 #' @useDynLib qstack rev_pl
 rev_pl_ <- function(x) .Call(rev_pl, x)

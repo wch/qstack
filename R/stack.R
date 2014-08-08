@@ -6,23 +6,24 @@ Stack <- function() {
   s <- NULL
 
   push <- function(value) {
-    s <<- push_(s, value)
+    s <<- .Call(push2, s, value)
     invisible(self)
   }
 
   mpush <- function(..., .list = NULL) {
-    args <- rev_pl_(append_pl_(pairlist(...), as.pairlist(.list)))
-    s <<- append_pl_(args, s)
+    args <- .Call(rev_pl,
+                  .Call(append_pl, pairlist(...), as.pairlist(.list)))
+    s <<- .Call(append_pl, args, s)
     invisible(self)
   }
 
   pop <- function() {
-    val <- car_(s)
-    s <<- cdr_(s)
+    val <- .Call(car, s)
+    s <<- .Call(cdr, s)
     val
   }
 
-  peek <- function() car_(s)
+  peek <- function() .Call(car, s)
 
   empty <- function() is.null(s)
 
