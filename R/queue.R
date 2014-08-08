@@ -47,10 +47,13 @@ Queue <- function() {
   reset <- function() {
     q <<- NULL
     last <<- NULL
+    invisible(self)
   }
 
   size <- function() length(q)
 
+  # Return the entire queue as a list, where the first item is the oldest
+  # in the queue.
   show <- function() as.list(q)
 
   self
