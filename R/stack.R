@@ -13,7 +13,8 @@ Stack <- function() {
   mpush <- function(..., .list = NULL) {
     args <- .Call(rev_pl,
                   .Call(append_pl, pairlist(...), as.pairlist(.list)))
-    s <<- .Call(append_pl, args, s)
+    .Call(append_pl, args, s)
+    s <<- args
     invisible(self)
   }
 
