@@ -24,3 +24,13 @@ append_pl_ <- function(x, ...) .Call(append_plC, x, ...)
 
 #' @useDynLib qstack duplicateC
 duplicate_ <- function(x) .Call(duplicateC, x)
+
+#' @useDynLib qstack push_listC
+push_list_ <- function(x, lst) {
+  .Call(push_listC, x, lst)
+}
+
+#' @useDynLib qstack append_listC
+append_list_ <- function(x, lst) {
+  .Call(append_listC, x, lst)
+}

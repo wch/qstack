@@ -43,6 +43,47 @@ SEXP pushC(SEXP x, SEXP value) {
 }
 
 
+// Add the items from a list `lst` to the head of a pairlist `x`.
+// The pushing happens in the order of the list, so the result is in reverse
+// order.
+// Returned pairlist is NOT a copy; it includes the original x.
+SEXP push_listC(SEXP x, SEXP lst) {
+  if (!isList(x))
+    error("x must be a pairlist");
+  if (!isNewList(lst))
+    error("lst must be a list");
+
+  int len = length(lst);
+  for (int i = 0; i < len; i++) {
+    x = CONS(VECTOR_ELT(lst, i), x);
+  }
+  return x;
+}
+
+
+// Add the items from a list `lst` to the tail of a pairlist `x`, and return
+// a pairlist pointing to the last element.
+// This modifies pairlist x in place.
+// Returned pairlist is NOT a copy; it includes the original x.
+SEXP append_listC(SEXP x, SEXP lst) {
+  if (x == R_NilValue)
+    error("x must be a pairlist of length >= 1");
+  if (!isList(x))
+    error("x must be a pairlist");
+  if (!isNewList(lst))
+    error("lst must be a list");
+
+  x = lastC(x);
+  int len = length(lst);
+  for (int i = 0; i < len; i++) {
+    SETCDR(x, CONS(VECTOR_ELT(lst, i), R_NilValue));
+    x = CDR(x);
+  }
+
+  return x;
+}
+
+
 // Given a pairlist, return a pairlist with reversed order.
 // Returned pairlist is a copy.
 SEXP rev_plC(SEXP x) {
