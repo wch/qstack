@@ -4,9 +4,7 @@
 
 // Given a pairlist, return the first item
 SEXP carC(SEXP x) {
-  if (x == R_NilValue)
-    return R_NilValue;
-  if (TYPEOF(x) != LISTSXP)
+  if (!isList(x))
     error("x must be a pairlist");
   return CAR(x);
 }
@@ -15,9 +13,7 @@ SEXP carC(SEXP x) {
 // Given a pairlist, return a pairlist with all except the first item
 // Returned pairlist is NOT a copy; it is part of the original x.
 SEXP cdrC(SEXP x) {
-  if (x == R_NilValue)
-    return R_NilValue;
-  if (TYPEOF(x) != LISTSXP)
+  if (!isList(x))
     error("x must be a pairlist");
   return CDR(x);
 }
@@ -27,9 +23,7 @@ SEXP cdrC(SEXP x) {
 // the last element.
 // Returned pairlist is NOT a copy; it is part of the original x.
 SEXP lastC(SEXP x) {
-  if (x == R_NilValue)
-    return R_NilValue;
-  if (TYPEOF(x) != LISTSXP)
+  if (!isList(x))
     error("x must be a pairlist");
 
   SEXP next = x;
@@ -43,7 +37,7 @@ SEXP lastC(SEXP x) {
 // Add an item to the head of a pairlist (position 1).
 // Returned pairlist is NOT a copy; it includes the original x.
 SEXP pushC(SEXP x, SEXP value) {
-  if (x != R_NilValue && TYPEOF(x) != LISTSXP)
+  if (!isList(x))
     error("x must be a pairlist");
   return CONS(value, x);
 }
@@ -52,10 +46,8 @@ SEXP pushC(SEXP x, SEXP value) {
 // Given a pairlist, return a pairlist with reversed order.
 // Returned pairlist is a copy.
 SEXP rev_plC(SEXP x) {
-  if (x == R_NilValue)
-    return R_NilValue;
-  if (TYPEOF(x) != LISTSXP)
-    error("x must be a pairlist.");
+  if (!isList(x))
+    error("x must be a pairlist");
 
   SEXP new_x = R_NilValue;
 
