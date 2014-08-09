@@ -75,14 +75,14 @@ test_that("append_pl_", {
   expect_identical(append_pl_(NULL, pairlist(1,2,3)), pairlist(1,2,3))
 
   p1 <- pairlist(1); p2 <- pairlist(2)
-  expect_identical(append_pl_(p1, p2), p2) # Should return last element, which is p2
+  expect_identical(append_pl_(p1, p2), p1) # Should return first element, which is p1
   expect_identical(p1, pairlist(1,2))      # Should have modified p1 in place
 
   p1 <- pairlist(1,2); p2 <- pairlist(3)
-  expect_identical(append_pl_(p1, p2), p2) # Should return last element, which is p2
+  expect_identical(append_pl_(p1, p2), p1) # Should return first element, which is p1
   expect_identical(p1, pairlist(1,2,3))    # Should have modified p1 in place
 
   p1 <- pairlist(1); p2 <- pairlist(2,3)
-  expect_identical(append_pl_(p1, p2), last_(p2)) # Should return last element of p2
-  expect_identical(p1, pairlist(1,2,3))           # Should have modified p1 in place
+  expect_identical(append_pl_(p1, p2), p1) # Should return first element, which is p1
+  expect_identical(p1, pairlist(1,2,3))    # Should have modified p1 in place
 })
