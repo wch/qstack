@@ -5,11 +5,11 @@ test_that("Basic operations", {
   expect_true(s$isempty())
   expect_identical(s$size(), 0L)
 
-  s$push(5)$push(6)$push(7)$push(list(a=1,b=2))
+  s$push(5)$push(6)$push(NULL)$push(list(a=1,b=2))
 
   expect_identical(s$pop(), list(a=1,b=2))
-  expect_identical(s$peek(), 7)
-  expect_identical(s$pop(), 7)
+  expect_identical(s$peek(), NULL)
+  expect_identical(s$pop(), NULL)
   expect_identical(s$size(), 2L)
 
   # show() returns in the reverse order that they were inserted
@@ -20,14 +20,15 @@ test_that("Basic operations", {
 })
 
 
-test_that("pushing multiple", {
+test_that("Pushing multiple", {
   s <- Stack()
   s$push(1,2,3)
-  s$push(4,5)
-  s$push(6,7)
-  expect_identical(s$show(), list(7,6,5,4,3,2,1))
-  expect_identical(s$pop(), 7)
-  expect_identical(s$pop(), 6)
+  s$push(4,5, .list=list(6,list(7,8)))
+  s$push(9,10)
+  expect_identical(s$show(), list(10,9,list(7,8),6,5,4,3,2,1))
+  expect_identical(s$pop(), 10)
+  expect_identical(s$pop(), 9)
+  expect_identical(s$pop(), list(7,8))
 })
 
 
