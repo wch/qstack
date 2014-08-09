@@ -10,16 +10,13 @@ Queue <- function() {
   last <- NULL
 
   add <- function(..., .list = NULL) {
-    args <- .Call(append_plC, pairlist(...), as.pairlist(.list))
-
     if (is.null(q)) {
-      q <<- args
+      q <<- as.pairlist(c(list(...), .list))
       last <<- .Call(lastC, q)
+
     } else {
-      # This modifies `last` in place, adding the `args` pairlist.
-      # Because `last` points to the last element in q, this also indirectly
-      # modifies q, in violation of the usual R copy-on-write behavior.
-      last <<- .Call(lastC, .Call(append_plC, last, args))
+      last <<- .Call(append_listC, last, list(...))
+      last <<- .Call(append_listC, last, .list)
     }
     invisible(self)
   }

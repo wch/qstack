@@ -6,10 +6,8 @@ Stack <- function() {
   s <- NULL
 
   push <- function(..., .list = NULL) {
-    args <- .Call(rev_plC,
-              .Call(append_plC, pairlist(...), as.pairlist(.list)))
-    .Call(append_plC, args, s)
-    s <<- args
+    s <<- .Call(push_listC, s, list(...))
+    s <<- .Call(push_listC, s, .list)
     invisible(self)
   }
 
