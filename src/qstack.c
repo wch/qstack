@@ -3,7 +3,7 @@
 
 
 // Given a pairlist, return the first item
-SEXP car(SEXP x) {
+SEXP carC(SEXP x) {
   if (x == R_NilValue)
     return R_NilValue;
   if (TYPEOF(x) != LISTSXP)
@@ -14,7 +14,7 @@ SEXP car(SEXP x) {
 
 // Given a pairlist, return a pairlist with all except the first item
 // Returned pairlist is NOT a copy; it is part of the original x.
-SEXP cdr(SEXP x) {
+SEXP cdrC(SEXP x) {
   if (x == R_NilValue)
     return R_NilValue;
   if (TYPEOF(x) != LISTSXP)
@@ -26,7 +26,7 @@ SEXP cdr(SEXP x) {
 // Given a pairlist, traverse to the end and return a pairlist pointing to
 // the last element.
 // Returned pairlist is NOT a copy; it is part of the original x.
-SEXP last2(SEXP x) {
+SEXP lastC(SEXP x) {
   if (x == R_NilValue)
     return R_NilValue;
   if (TYPEOF(x) != LISTSXP)
@@ -42,7 +42,7 @@ SEXP last2(SEXP x) {
 
 // Add an item to the head of a pairlist (position 1).
 // Returned pairlist is NOT a copy; it includes the original x.
-SEXP push2(SEXP x, SEXP value) {
+SEXP pushC(SEXP x, SEXP value) {
   if (x != R_NilValue && TYPEOF(x) != LISTSXP)
     error("x must be a pairlist");
   return CONS(value, x);
@@ -51,7 +51,7 @@ SEXP push2(SEXP x, SEXP value) {
 
 // Given a pairlist, return a pairlist with reversed order.
 // Returned pairlist is a copy.
-SEXP rev_pl(SEXP x) {
+SEXP rev_plC(SEXP x) {
   if (x == R_NilValue)
     return R_NilValue;
   if (TYPEOF(x) != LISTSXP)
@@ -71,14 +71,14 @@ SEXP rev_pl(SEXP x) {
 // points to the last item.
 // This modifies pairlist x in place. The returned pairlist is part of pairlist
 // x; it is the last node in the linked list.
-SEXP append2(SEXP x, SEXP value) {
+SEXP appendC(SEXP x, SEXP value) {
   if (x == R_NilValue)
     return CONS(value, R_NilValue);
   if (TYPEOF(x) != LISTSXP)
     error("x must be a pairlist of length 1.");
 
   // Traverse to end
-  x = last2(x);
+  x = lastC(x);
 
   // Make a pairlist containing the value and add it to the end
   SETCDR(x, CONS(value, R_NilValue));
@@ -87,10 +87,10 @@ SEXP append2(SEXP x, SEXP value) {
 
 
 // Similar to append, except this takes two pairlists, x and y, and appends y to
-// the end of x.
+// the end of x, and then returns a pairlist that points to the first item of x.
 // This modifies pairlist x in place, and the returned pairlist includes the
 // original x and y.
-SEXP append_pl(SEXP x, SEXP y) {
+SEXP append_plC(SEXP x, SEXP y) {
   if (x == R_NilValue)
     return y;
   if (y == R_NilValue)
@@ -101,14 +101,13 @@ SEXP append_pl(SEXP x, SEXP y) {
     error("y must be a pairlist.");
 
   // Traverse to end
-  x = last2(x);
+  SEXP xend = lastC(x);
 
-  SETCDR(x, y);
-  // Go to the end and return last element
-  return last2(x);
+  SETCDR(xend, y);
+  return x;
 }
 
 // Force the creation of a duplicate of an object
-SEXP duplicate2(SEXP x) {
+SEXP duplicateC(SEXP x) {
   return duplicate(x);
 }

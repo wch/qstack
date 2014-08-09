@@ -5,28 +5,43 @@ Stack <- function() {
   # A pairlist that represents the stack
   s <- NULL
 
-  push <- function(value) {
-    s <<- .Call(push2, s, value)
+  push1 <- function(value) {
+    s <<- .Call(pushC, s, value)
     invisible(self)
   }
 
-  mpush <- function(..., .list = NULL) {
-    args <- .Call(rev_pl,
-                  .Call(append_pl, pairlist(...), as.pairlist(.list)))
-    .Call(append_pl, args, s)
+  push <- function(..., .list = NULL) {
+    dots <- list(...)
+
+    if (length(dots) == 1L && is.null(.list)) {
+      s <<- .Call(pushC, s, dots[[1]])
+      return(invisible(self))
+    }
+
+    args <- .Call(rev_plC,
+              .Call(append_plC, pairlist(...), as.pairlist(.list)))
+    .Call(append_plC, args, s)
     s <<- args
     invisible(self)
   }
 
-  pop <- function() {
-    val <- .Call(car, s)
-    s <<- .Call(cdr, s)
+  mpush <- function(..., .list = NULL) {
+    args <- .Call(rev_plC,
+              .Call(append_plC, pairlist(...), as.pairlist(.list)))
+    .Call(append_plC, args, s)
+    s <<- args
+    invisible(self)
+  }
+
+  pop <- function(n) {
+    val <- .Call(carC, s)
+    s <<- .Call(cdrC, s)
     val
   }
 
-  peek <- function() .Call(car, s)
+  peek <- function() .Call(carC, s)
 
-  empty <- function() is.null(s)
+  isempty <- function() is.null(s)
 
   reset <- function() {
     s <<- NULL
