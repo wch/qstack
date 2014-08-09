@@ -22,8 +22,10 @@ test_that("Basic operations", {
 
 test_that("madd", {
   q <- Queue()
-  q$madd(1,2,3,4,5,6)
-  expect_identical(q$show(), list(1,2,3,4,5,6))
+  q$add(1,2,3)
+  q$add(4,5)
+  q$add(6,7)
+  expect_identical(q$show(), list(1,2,3,4,5,6,7))
   expect_identical(q$remove(), 1)
   expect_identical(q$remove(), 2)
 })

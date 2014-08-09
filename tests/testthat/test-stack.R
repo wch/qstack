@@ -2,7 +2,7 @@ context("Stack")
 
 test_that("Basic operations", {
   s <- Stack()
-  expect_true(s$empty())
+  expect_true(s$isempty())
   expect_identical(s$size(), 0L)
 
   s$push(5)$push(6)$push(7)$push(list(a=1,b=2))
@@ -20,12 +20,14 @@ test_that("Basic operations", {
 })
 
 
-test_that("mpush", {
+test_that("pushing multiple", {
   s <- Stack()
-  s$mpush(1,2,3,4,5,6)
-  expect_identical(s$show(), list(6,5,4,3,2,1))
+  s$push(1,2,3)
+  s$push(4,5)
+  s$push(6,7)
+  expect_identical(s$show(), list(7,6,5,4,3,2,1))
+  expect_identical(s$pop(), 7)
   expect_identical(s$pop(), 6)
-  expect_identical(s$pop(), 5)
 })
 
 
@@ -33,7 +35,7 @@ test_that("Popping from empty stack", {
   s <- Stack()
   expect_null(s$pop())
   expect_null(s$pop())
-  expect_true(s$empty())
+  expect_true(s$isempty())
 
   s$push(5)$push(6)
   expect_identical(s$show(), list(6, 5))
