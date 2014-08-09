@@ -13,22 +13,13 @@ last_ <- function(x) .Call(lastC, x)
 #' @useDynLib qstack pushC
 push_ <- function(x, value) .Call(pushC, x, value)
 
-#' @useDynLib qstack rev_plC
-rev_pl_ <- function(x) .Call(rev_plC, x)
-
-#' @useDynLib qstack appendC
-append_ <- function(x, value) .Call(appendC, x, value)
-
-#' @useDynLib qstack append_plC
-append_pl_ <- function(x, ...) .Call(append_plC, x, ...)
-
-#' @useDynLib qstack duplicateC
-duplicate_ <- function(x) .Call(duplicateC, x)
-
 #' @useDynLib qstack push_listC
 push_list_ <- function(x, lst) {
   .Call(push_listC, x, lst)
 }
+
+#' @useDynLib qstack appendC
+append_ <- function(x, value) .Call(appendC, x, value)
 
 #' @useDynLib qstack append_listC
 append_list_ <- function(x, lst) {
