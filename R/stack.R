@@ -28,9 +28,9 @@ Stack <- function() {
 
   size <- function() length(s)
 
-  # Return the entire stack as a list, where the first item is the most
-  # recently added.
-  show <- function() as.list(s)
+  # Return the entire queue as a list, where the first item is the next to be
+  # removed (and the most recently added).
+  as_list <- function() as.list(s)
 
   self
 }

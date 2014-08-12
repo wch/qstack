@@ -12,8 +12,8 @@ test_that("Basic operations", {
   expect_identical(q$peek(), NULL)
   expect_identical(q$size(), 2L)
 
-  # show() returns in the order inserted
-  expect_identical(q$show(), list(NULL, list(a=1,b=2)))
+  # as_list() returns in the order inserted
+  expect_identical(q$as_list(), list(NULL, list(a=1,b=2)))
 
   expect_identical(q$reset(), q)
   expect_identical(q$size(), 0L)
@@ -25,7 +25,7 @@ test_that("Addding multiple", {
   q$add(1,2,3)
   q$add(4,5, .list=list(6,list(7,8)))
   q$add(9,10)
-  expect_identical(q$show(), list(1,2,3,4,5,6,list(7,8),9,10))
+  expect_identical(q$as_list(), list(1,2,3,4,5,6,list(7,8),9,10))
   expect_identical(q$remove(), 1)
   expect_identical(q$remove(), 2)
 })
@@ -38,5 +38,5 @@ test_that("Removing from empty queue", {
   expect_true(q$empty())
 
   q$add(5)$add(6)
-  expect_identical(q$show(), list(5, 6))
+  expect_identical(q$as_list(), list(5, 6))
 })
