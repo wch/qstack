@@ -6,18 +6,18 @@ Stack <- function() {
   s <- NULL
 
   push <- function(..., .list = NULL) {
-    s <<- .Call(push_listC, s, list(...))
-    s <<- .Call(push_listC, s, .list)
+    s <<- .Call(C_push_list, s, list(...))
+    s <<- .Call(C_push_list, s, .list)
     invisible(self)
   }
 
   pop <- function(n) {
-    val <- .Call(carC, s)
-    s <<- .Call(cdrC, s)
+    val <- .Call(C_car, s)
+    s <<- .Call(C_cdr, s)
     val
   }
 
-  peek <- function() .Call(carC, s)
+  peek <- function() .Call(C_car, s)
 
   isempty <- function() is.null(s)
 

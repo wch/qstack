@@ -12,22 +12,22 @@ Queue <- function() {
   add <- function(..., .list = NULL) {
     if (is.null(q)) {
       q <<- as.pairlist(c(list(...), .list))
-      last <<- .Call(lastC, q)
+      last <<- .Call(C_last, q)
 
     } else {
-      last <<- .Call(append_listC, last, list(...))
-      last <<- .Call(append_listC, last, .list)
+      last <<- .Call(C_append_list, last, list(...))
+      last <<- .Call(C_append_list, last, .list)
     }
     invisible(self)
   }
 
   remove <- function() {
-    val <- .Call(carC, q)
-    q <<- .Call(cdrC, q)
+    val <- .Call(C_car, q)
+    q <<- .Call(C_cdr, q)
     val
   }
 
-  peek <- function() .Call(carC, q)
+  peek <- function() .Call(C_car, q)
 
   empty <- function() is.null(q)
 
