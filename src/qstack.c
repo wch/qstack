@@ -101,3 +101,8 @@ SEXP C_append_list(SEXP x, SEXP lst) {
 
   return x;
 }
+
+// Force the duplication of an object
+SEXP C_duplicate(SEXP x) {
+  return duplicate(x);
+}

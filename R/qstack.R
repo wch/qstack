@@ -25,3 +25,7 @@ append_ <- function(x, value) .Call(C_append, x, value)
 append_list_ <- function(x, lst) {
   .Call(C_append_list, x, lst)
 }
+
+#' @useDynLib qstack C_duplicate
+duplicate_ <- function(x) .Call(C_duplicate, x)
+
