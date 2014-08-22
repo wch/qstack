@@ -25,3 +25,6 @@ append_list_ <- function(x, lst) .Call(C_append_list, x, lst)
 #' @useDynLib qstack C_duplicate
 duplicate_ <- function(x) .Call(C_duplicate, x)
 
+.onUnload <- function (libpath) {
+  library.dynam.unload("qstack", libpath)
+}
