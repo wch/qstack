@@ -36,6 +36,7 @@ test_that("Removing from empty queue", {
   expect_null(q$remove())
   expect_null(q$remove())
   expect_true(q$empty())
+  expect_identical(q$as_list(), list())
 
   q$add(5)$add(6)
   expect_identical(q$as_list(), list(5, 6))
