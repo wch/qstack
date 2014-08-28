@@ -91,3 +91,33 @@ test_that("Operations on size 1 queue", {
 
 
 })
+
+
+test_that("torture test comparing Queue and Queue2", {
+  q <- Queue()
+  q2 <- Queue2(3)
+
+  set.seed(1332)
+  npos <- 1e5
+  nneg <- 8e4
+  ops <- sample(c(rep(1, npos), rep(-1, nneg)))
+  ops[ops == 1] <- seq_len(npos)
+
+  # Compare the two queues
+  for (i in seq_along(ops)) {
+    op <- ops[i]
+
+    if (op < 0) {
+      v1 <- q$remove()
+      v2 <- q2$remove()
+      if ( !identical(v1, v2) ) {
+        stop("Queue and Queue2 have different result: ",
+             paste(i, format(v1), format(v2)) )
+      }
+
+    } else {
+      q$add(op)
+      q2$add(op)
+    }
+  }
+})

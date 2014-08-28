@@ -136,14 +136,15 @@ Queue2 <- function(init = 20) {
     len <- length(q)
     value <- q[[tail]]
     q[tail] <<- list(NULL)
-    tail <<- tail + 1L
-    if (tail > head) {
-      # Tail meets head; now we're empty
+    if (tail == head) {
+      # We've emptied the queue
       tail <<- head <<- 0L
+    } else {
+      tail <<- tail + 1L
 
-    } else if (tail > len) {
       # Wrapped around
-      tail <<- tail - len
+      if (tail > len)
+        tail <<- tail - len
     }
 
     # Shrink list if < 1/4 of the list is used, down to a minimum size of `init`
