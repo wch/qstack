@@ -102,7 +102,11 @@ Stack2 <- function(init = 20) {
     value
   }
 
-  peek <- function() s[[count]]
+  peek <- function() {
+    if (count == 0L)
+      return(NULL)
+    s[[count]]
+  }
 
   isempty <- function() count == 0L
 

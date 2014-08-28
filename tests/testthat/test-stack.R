@@ -36,6 +36,7 @@ test_that("Popping from empty stack", {
   s <- Stack()
   expect_null(s$pop())
   expect_null(s$pop())
+  expect_null(s$peek())
   expect_true(s$isempty())
 
   s$push(5)$push(6)
