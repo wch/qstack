@@ -33,9 +33,9 @@ Stack <- function() {
 
   size <- function() length(s)
 
-  # Return the entire queue as a list, where the first item is the next to be
-  # removed (and the most recently added).
-  as_list <- function() as.list(s)
+  # Return the entire stack as a list, where the first item in the list is the
+  # oldest item in the stack, and the last item is the most recently added.
+  as_list <- function() rev(as.list(s))
 
   self
 }
@@ -118,9 +118,9 @@ Stack2 <- function(init = 20) {
 
   size <- function() count
 
-  # Return the entire queue as a list, where the last item is the next to be
-  # removed (and the most recently added).
-  as_list <- function() s[rev(seq_len(count))]
+  # Return the entire stack as a list, where the first item in the list is the
+  # oldest item in the stack, and the last item is the most recently added.
+  as_list <- function() s[seq_len(count)]
 
   self
 }
