@@ -98,8 +98,8 @@ test_that("torture test comparing Queue and Queue2", {
   q2 <- Queue2(3)
 
   set.seed(1332)
-  npos <- 1e5
-  nneg <- 8e4
+  npos <- 1e4
+  nneg <- 8e3
   ops <- sample(c(rep(1, npos), rep(-1, nneg)))
   ops[ops == 1] <- seq_len(npos)
 
