@@ -69,6 +69,7 @@ Queue2 <- function(init = 20) {
   tail <- 0L  # Index of oldest item (next to be removed)
 
 
+  # TODO: implement with ... and .list arguments
   add <- function(value) {
     len <- length(q)
     new_head <- head + 1L
